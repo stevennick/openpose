@@ -1,7 +1,7 @@
 set(CUDNN_ROOT "" CACHE PATH "CUDNN root folder")
 set(CUDNN_LIB_NAME "libcudnn.so")
 
-find_path(CUDNN_INCLUDE cudnn.h
+find_path(CUDNN_INCLUDE cudnn_version.h
     PATHS ${CUDNN_ROOT} $ENV{CUDNN_ROOT} ${CUDA_TOOLKIT_INCLUDE}
     DOC "Path to cuDNN include directory." )
 
@@ -14,7 +14,7 @@ if(CUDNN_INCLUDE AND CUDNN_LIBRARY)
     set(HAVE_CUDNN  TRUE)
     set(CUDNN_FOUND TRUE)
 
-    file(READ ${CUDNN_INCLUDE}/cudnn.h CUDNN_VERSION_FILE_CONTENTS)
+    file(READ ${CUDNN_INCLUDE}/cudnn_version.h CUDNN_VERSION_FILE_CONTENTS)
 
     # cuDNN v3 and beyond
     string(REGEX MATCH "define CUDNN_MAJOR * +([0-9]+)"
